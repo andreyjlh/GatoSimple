@@ -2,56 +2,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
+#include "gato_library.h"
 
 #define PLAYER 'X'
 #define COMPUTER 'O'
 char board [3][3];
-
-
-void resetBoard();
-void printBoard();
-int checkFreeSpaces();
-void playersMove();
-void computerMove();
-char checkWinner();
-void printWinner(char);
-
-int main(){
-    char winner = ' ';
-    char response; 
-    do
-    {   
-        winner = ' ';
-        response = ' ';
-        resetBoard();
-
-        while(winner == ' ' && checkFreeSpaces()!=0){
-            printBoard();
-            playersMove();
-            winner = checkWinner();
-            if(winner != ' ' || checkFreeSpaces() == 0){
-                break;
-            }
-
-            computerMove();
-            winner = checkWinner();
-            if(winner != ' ' || checkFreeSpaces() == 0){
-                break;
-            }
-        }
-        printBoard();
-        printWinner(winner);
-
-        printf("\nWOULD YOU LIKE TO PLAY AGAIN?(Y/N): ");
-        fflush(stdin); //buffer clear
-        scanf("%c",&response);
-        response = toupper(response); 
-    } while (response == 'Y');
-    
-    printf("\nTHANKS FOR PLAYING!!!");
-
-    return 0;
-}
 
 void resetBoard(){
     for(int i = 0; i<3;i++){
